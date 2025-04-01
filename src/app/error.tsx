@@ -14,36 +14,32 @@ export default function Error({ error, reset }: ErrorProps) {
     // Log only limited error information to avoid security risks
     console.error("Application error occurred");
     
-    // In a production app, you would send this to a logging service
-    // Example: sendToErrorService({
-    //   message: error.message,
-    //   stack: error.stack,
-    //   name: error.name
-    // });
+    // In a production app, you would send this to a secure error logging service
+    // but never log the full error details to the browser console
   }, [error]);
 
   return (
-    <div className={styles.errorContainer}>
+    <main className={styles.errorContainer}>
       <Image 
         src="/images/error.png"
-        alt="Error"
+        alt="Error crítico"
         width={160}
         height={160}
         className={styles.errorImage}
         priority
       />
-      <h1 className={styles.errorTitle}>¡Ups! Algo salió mal</h1>
+      <h1 className={styles.errorTitle}>Error crítico</h1>
       <p className={styles.errorMessage}>
-        Ha ocurrido un error inesperado. Nuestro equipo ha sido notificado y 
-        estamos trabajando para solucionarlo. Por favor, intenta nuevamente o 
-        regresa más tarde.
+        Lo sentimos, ha ocurrido un error en la aplicación. 
+        Nuestro equipo técnico ha sido notificado y estamos trabajando 
+        para resolverlo lo antes posible.
       </p>
       <button 
         onClick={reset} 
         className={styles.errorButton}
       >
-        Intentar nuevamente
+        Reiniciar aplicación
       </button>
-    </div>
+    </main>
   );
-}
+} 

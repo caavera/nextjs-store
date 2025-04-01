@@ -8,10 +8,11 @@ interface CategoryProps {
 }
 
 export default function Category(props: CategoryProps) {
-  //console.log(props)
   const params = use(props.params)
   const { categories } = params
-  //console.log(categories)
+  
+  //throw new Error("Error de prueba para GlobalError")
+  
   return(
     <h1>Categoria dinámica: {categories}</h1>
   )
