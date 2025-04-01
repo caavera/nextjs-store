@@ -1,4 +1,5 @@
-import { use } from "react"
+import { ProductsWrapper } from "@/components/store/ProductsWrapper"
+import { getProducts } from "@/services/shopify"
 
 interface CategoryProps {
   params: Promise<{
@@ -7,13 +8,11 @@ interface CategoryProps {
   searchParams?: Promise<Record<string, string>>
 }
 
-export default function Category(props: CategoryProps) {
-  const params = use(props.params)
-  const { categories } = params
-  
-  //throw new Error("Error de prueba para GlobalError")
-  
+export default async function Category(props: CategoryProps){
+  const products = await getProducts()
+  const { categories } = await props.params
+  // throw new Error('Error: boom')
   return(
-    <h1>Categoria dinámica: {categories}</h1>
+    <ProductsWrapper products={products}/>
   )
 }
