@@ -23,11 +23,11 @@ export const getProducts = async (): Promise<ProductType[]> => {
         'X-Shopify-Access-Token': env.SHOPIFY_ACCES_TOKEN
       })
     })
-    
+
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`)
     }
-    
+
     const { products } = await response.json()
     return transformProducts(products)
   } catch (error) {
@@ -44,17 +44,17 @@ export const getProduct = async (id: string): Promise<ProductType | null> => {
         'X-Shopify-Access-Token': env.SHOPIFY_ACCES_TOKEN
       })
     })
-    
+
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`)
     }
-    
+
     const { products } = await response.json()
-    
+
     if (products.length === 0) {
       return null
     }
-    
+
     // Transformamos y devolvemos el primer producto (debería ser el único)
     const transformedProducts = transformProducts(products)
     return transformedProducts[0]
@@ -62,4 +62,17 @@ export const getProduct = async (id: string): Promise<ProductType | null> => {
     console.error(`Error fetching product with id ${id}:`, error)
     return null
   }
+}
+
+export const getMainProducts = async () => {
+  const response = await fetch(shopifyUrls.products.mainProducts, {
+    headers: new Headers({
+      'X-Shopify-Access-Token': env.SHOPIFY_ACCES_TOKEN
+    }),
+    cache: 'no-cache'
+  })
+
+  const { products } = await response.json()
+
+  return products
 }
