@@ -15,10 +15,36 @@ export const handleCreateUser = async (formData: FormData) => {
     }
   }
 
-  const { customerCreate } = await graphqlClient.request(createUserMutation, variables)
+  const response = await graphqlClient.request(createUserMutation, variables)
+  const { customerCreate } = response as { 
+    customerCreate: { 
+      customerUserErrors: any[], 
+      customer: { firstName?: string } 
+    } 
+  }
+  
   const { customerUserErrors, customer } = customerCreate
   if(customer?.firstName){
     await createAccessToken(formDataObject.email as string, formDataObject.password as string)
     redirect('/store')
+  }
+  
+  // Si llegamos aquí, la creación del usuario falló
+  return {
+    errors: customerUserErrors
+  }
+}
+
+export const handleLogin = async (formData: FormData) => {
+  const formDataObject = Object.fromEntries(formData)
+  const loginSuccessful = await createAccessToken(formDataObject.email as string, formDataObject.password as string)
+  
+  if(loginSuccessful){
+    redirect('/store')
+  }
+  
+  // Si llegamos aquí, el login falló
+  return {
+    error: "Credenciales inválidas. Por favor verifica tu email y contraseña."
   }
 }
