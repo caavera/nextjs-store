@@ -12,6 +12,7 @@ const transformProducts = (products: any[]): ProductType[] => {
     quantity: product.variants[0].inventory_quantity,
     handle: product.handle,
     tags: product.tags,
+    gql_id: product.variants[0].admin_graphql_api_id
   }))
 }
 

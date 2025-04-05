@@ -4,13 +4,16 @@ import { redirect } from "next/navigation"
 
 interface ProductPageProps {
   searchParams: {
-    id: string
+    id?: string
   }
 }
 
 export async function generateMetadata({ searchParams }: ProductPageProps) { 
-  const id = searchParams.id
+  const { id = '' } = searchParams
+  if (!id) return { title: 'Product not found' }
+  
   const product = await getProduct(id)
+  if (!product) return { title: 'Product not found' }
 
   return {
     title: product.title,
@@ -23,7 +26,7 @@ export async function generateMetadata({ searchParams }: ProductPageProps) {
 }
 
 export default async function ProductPage({ searchParams }: ProductPageProps) {
-  const id = searchParams.id
+  const { id = '' } = searchParams
   if (!id) {
     redirect('/store')
   }
