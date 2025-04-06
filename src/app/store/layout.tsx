@@ -2,6 +2,13 @@ import { getCollections } from "@/services/shopify/collections"
 import Link from "next/link"
 import styles from './StoreLayout.module.sass'
 
+// Define interface for the collection object
+interface Collection {
+  id: string;
+  title: string;
+  handle: string;
+}
+
 export const runtime = "edge"
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
@@ -13,7 +20,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
       <nav>
         <ul className={styles.StoreLayout__list}>
           {
-            collections.map((collection) => (
+            collections.map((collection: Collection) => (
               <Link key={collection.id} href={'/store/' + collection.handle} className={styles.StoreLayout__chip}>
                 {collection.title}
               </Link>
