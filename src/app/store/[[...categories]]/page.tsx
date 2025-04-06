@@ -3,9 +3,9 @@ import { getCollectionProducts, getCollections } from "@/services/shopify/collec
 import { getProducts } from "@/services/shopify/products"
 
 interface CategoryProps {
-  params: Promise<{
+  params: {
     categories: string[],
-  }>
+  }
   searchParams?: Promise<Record<string, string>>
 }
 
