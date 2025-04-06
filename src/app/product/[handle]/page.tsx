@@ -3,9 +3,9 @@ import { getProduct } from "app/services/shopify/products"
 import { redirect } from "next/navigation"
 
 interface ProductPageProps {
-  searchParams: {
+  searchParams: Promise<{
     id: string
-  }
+  }>
 }
 
 export async function generateMetadata({ searchParams }: ProductPageProps) { 
