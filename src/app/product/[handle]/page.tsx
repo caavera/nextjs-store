@@ -9,7 +9,7 @@ interface ProductPageProps {
 }
 
 export async function generateMetadata({ searchParams }: ProductPageProps) { 
-  const { id = '' } = searchParams
+  const { id = '' } = await searchParams
   if (!id) return { title: 'Product not found' }
   
   const product = await getProduct(id)
@@ -26,7 +26,8 @@ export async function generateMetadata({ searchParams }: ProductPageProps) {
 }
 
 export default async function ProductPage({ searchParams }: ProductPageProps) {
-  const { id = '' } = searchParams
+  const params = await searchParams;
+  const { id = '' } = params
   if (!id) {
     redirect('/store')
   }
