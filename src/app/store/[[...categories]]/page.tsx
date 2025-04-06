@@ -3,10 +3,9 @@ import { getCollectionProducts, getCollections } from "@/services/shopify/collec
 import { getProducts } from "@/services/shopify/products"
 
 interface CategoryProps {
-  params: {
-    categories: string[],
-  }
-  searchParams?: Promise<Record<string, string>>
+  searchParams: Promise<{ 
+    categories: string[] 
+  }>
 }
 
 // Define interface for the collection object based on what getCollections returns
@@ -17,14 +16,19 @@ interface Collection {
 }
 
 export default async function Category(props: CategoryProps){
-  const { categories } = props.params
+  const { categories } = await props.searchParams
+  
   let products = []
   const collections = await getCollections()
   
-  if (categories?.length > 0) {
-    const selectedCollectionId = collections.find((collection: Collection) => collection.handle === categories[0]).id
-    products = await getCollectionProducts(selectedCollectionId)
-  }else {
+  if (categories && categories.length > 0) {
+    const selectedCollectionId = collections.find((collection: Collection) => collection.handle === categories[0])?.id
+    if (selectedCollectionId) {
+      products = await getCollectionProducts(selectedCollectionId)
+    } else {
+      products = await getProducts()
+    }
+  } else {
     products = await getProducts()
   }
 
