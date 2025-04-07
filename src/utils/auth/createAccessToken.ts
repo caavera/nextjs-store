@@ -32,7 +32,8 @@ export const createAccessToken = async (email: string, password: string): Promis
         path: "/",
         expires: new Date(expiresAt),
         httpOnly: true,
-        sameSite: "strict"
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production"
       })
       
       return true

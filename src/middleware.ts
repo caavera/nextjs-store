@@ -1,4 +1,3 @@
-import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
@@ -11,8 +10,7 @@ export const config = {
 }
 
 export async function middleware(request: NextRequest) {
-  const cookiesStore = await cookies()
-  const accessToken = cookiesStore.get('accessToken')?.value
+  const accessToken = request.cookies.get('accessToken')?.value
   if(accessToken){
     return NextResponse.redirect(new URL('/store', request.url))
   }

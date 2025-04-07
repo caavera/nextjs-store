@@ -57,11 +57,15 @@ export const handleCreateCart = async (items: CartItem[]) => {
 
   const graphqlClient = GraphQLClientSingleton.getInstance().getClient()
   const customer = await validateAccessToken()
+  
+  // If no customer is found, redirect to login
+  if (!customer) redirect('/login')
+  
   const variables = {
     input: {
       buyerIdentity: {
         customerAccessToken: accessToken,
-        email: customer?.email
+        email: customer.email
       },
       lines: items.map(item => ({
         merchandiseId: item.merchandiseId,
