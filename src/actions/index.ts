@@ -51,16 +51,16 @@ export const handleLogin = async (formData: FormData) => {
 
 export const handleCreateCart = async (items: CartItem[]) => {
   const cookiesStore = await cookies()
-  const accesToken = cookiesStore.get('accessToken')?.value as string
+  const accessToken = cookiesStore.get('accessToken')?.value as string
 
-  if(!accesToken) redirect('/login')
+  if(!accessToken) redirect('/login')
 
   const graphqlClient = GraphQLClientSingleton.getInstance().getClient()
   const customer = await validateAccessToken()
   const variables = {
     input: {
       buyerIdentity: {
-        customerAccessToken: accesToken,
+        customerAccessToken: accessToken,
         email: customer?.email
       },
       lines: items.map(item => ({
