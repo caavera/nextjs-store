@@ -13,7 +13,7 @@
 ## 🚀 Live Demo
 
 <div align="center">
-  <a href="#" target="_blank">
+  <a href="https://nextjs-store-jade.vercel.app/" target="_blank">
     <img src="https://img.shields.io/badge/View_Demo-Vercel-black?style=for-the-badge&logo=vercel" alt="Live Demo on Vercel"/>
   </a>
 </div>
