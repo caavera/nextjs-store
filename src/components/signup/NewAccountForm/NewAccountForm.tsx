@@ -10,8 +10,17 @@ export const NewAccountForm = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    await handleCreateUser(formData)
+    setLoading(true);
+    setErrors([]);
+    
+    try {
+      const formData = new FormData(event.currentTarget);
+      await handleCreateUser(formData);
+    } catch (error) {
+      setErrors(typeof error === 'string' ? [error] : ['Error creating account']);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (

@@ -21,8 +21,10 @@ export const handleCreateUser = async (formData: FormData) => {
   const response = await graphqlClient.request(createUserMutation, variables)
   const { customerCreate } = response as { 
     customerCreate: { 
-      customerUserErrors: any[], 
-      customer: { firstName?: string } 
+      customer: { 
+        firstName?: string
+        email: string 
+      } 
     } 
   }
   

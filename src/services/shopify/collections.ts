@@ -1,6 +1,15 @@
 import { env } from "@/config/env"
 import { shopifyUrls } from "./urls"
 
+interface ShopifyCollection {
+  id: string | number
+  title: string
+  handle: string
+  image?: {
+    src: string
+  }
+}
+
 export const getCollections = async () => {
   try {
     const response = await fetch(shopifyUrls.collections.all, {
@@ -9,7 +18,7 @@ export const getCollections = async () => {
       })
     })
     const { smart_collections } = await response.json()
-    const transformedCollections = smart_collections.map((collection: any) => {
+    const transformedCollections = smart_collections.map((collection: ShopifyCollection) => {
       return {
         id: collection.id,
         title: collection.title,

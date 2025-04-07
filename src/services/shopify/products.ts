@@ -1,9 +1,26 @@
 import { env } from "@/config/env"
 import { shopifyUrls } from "./urls"
 
+// Define interface for Shopify product structure
+interface ShopifyProduct {
+  id: string;
+  title: string;
+  body_html: string;
+  variants: {
+    price: string;
+    inventory_quantity: number;
+    admin_graphql_api_id: string;
+  }[];
+  images: {
+    src: string;
+  }[];
+  handle: string;
+  tags: string;
+}
+
 // Función para transformar productos de la API a nuestro formato
-const transformProducts = (products: any[]): ProductType[] => {
-  return products.map((product: any) => ({
+const transformProducts = (products: ShopifyProduct[]): ProductType[] => {
+  return products.map((product: ShopifyProduct) => ({
     id: product.id,
     title: product.title,
     description: product.body_html,
