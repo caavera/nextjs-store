@@ -80,14 +80,32 @@ pnpm dev
 
 ```
 nextjs-store/
-├── app/                # Next.js 15 app directory
-│   ├── api/            # API routes and Edge functions
-│   ├── components/     # Reusable UI components
-│   ├── lib/            # Utility functions and helpers
-│   └── [routes]/       # Page routes
-├── public/             # Static assets
-├── styles/             # Global styles and SCSS modules
-└── [config files]      # Configuration files
+├── src/                 # Source directory
+│   ├── app/             # Next.js App Router pages
+│   │   ├── (home)/      # Home page route group
+│   │   ├── api/         # API endpoints
+│   │   ├── login/       # Login page
+│   │   ├── my-account/  # User account pages
+│   │   ├── product/     # Product detail pages
+│   │   ├── signup/      # Signup page
+│   │   ├── store/       # Store pages
+│   │   ├── error.tsx    # Error boundary
+│   │   ├── layout.tsx   # Root layout
+│   │   └── not-found.tsx # 404 page
+│   ├── actions/         # Server actions
+│   ├── components/      # Reusable UI components
+│   ├── config/          # App configuration
+│   ├── graphql/         # GraphQL queries and mutations
+│   ├── hooks/           # Custom React hooks
+│   ├── middleware.ts    # Next.js middleware
+│   ├── sass/            # Global SCSS styles
+│   ├── services/        # API services
+│   └── utils/           # Utility functions
+├── public/              # Static assets
+├── .env.example         # Environment variables template
+├── next.config.ts       # Next.js configuration
+├── tsconfig.json        # TypeScript configuration
+└── types.d.ts           # Global type definitions
 ```
 
 ## 📄 License
@@ -97,5 +115,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ---
 
 <p align="center">
-  Built as a learning project to explore Next.js 15 features and e-commerce development.
+  Built as a learning project to explore Next.js 15 features.
 </p>
