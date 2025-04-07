@@ -28,15 +28,10 @@ export const handleCreateUser = async (formData: FormData) => {
     } 
   }
   
-  const { customerUserErrors, customer } = customerCreate
+  const { customer } = customerCreate
   if(customer?.firstName){
     await createAccessToken(formDataObject.email as string, formDataObject.password as string)
     redirect('/store')
-  }
-  
-  // Si llegamos aquí, la creación del usuario falló
-  return {
-    errors: customerUserErrors
   }
 }
 
