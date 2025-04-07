@@ -46,7 +46,7 @@
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/nextjs-store.git
+git clone https://github.com/caavera/nextjs-store.git
 cd nextjs-store
 ```
 
